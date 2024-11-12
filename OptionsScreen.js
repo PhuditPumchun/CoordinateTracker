@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Button, TextInput, StyleSheet,TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { Ionicons } from '@expo/vector-icons'; // นำเข้าไอคอนเฟืองจาก Ionicons
+import { Ionicons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 
 export default function OptionsScreen({ options, updateOptions, setShowOptions }) {
@@ -15,7 +15,7 @@ export default function OptionsScreen({ options, updateOptions, setShowOptions }
       timeInterval: parseInt(timeInterval, 10),
       distanceInterval: parseFloat(distanceInterval),
     });
-    setShowOptions(false); // กลับไปยังหน้าหลัก
+    setShowOptions(false);
   };
 
   return (
@@ -50,8 +50,6 @@ export default function OptionsScreen({ options, updateOptions, setShowOptions }
         value={distanceInterval}
         onChangeText={(text) => setDistanceInterval(text)}
       />
-
-      <Button title="Save" onPress={saveOptions} />
 
       <TouchableOpacity
             style={styles.saveButton}
@@ -111,8 +109,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 25,
     padding: 10,
-    elevation: 5, // เพิ่มเงาเพื่อให้ดูเด่นขึ้น (เฉพาะ Android)
-    shadowColor: '#000', // เพิ่มเงา (เฉพาะ iOS)
+    elevation: 5, 
+    shadowColor: '#000', 
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
@@ -124,8 +122,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 25,
     padding: 10,
-    elevation: 5, // เพิ่มเงาเพื่อให้ดูเด่นขึ้น (เฉพาะ Android)
-    shadowColor: '#000', // เพิ่มเงา (เฉพาะ iOS)
+    elevation: 5, 
+    shadowColor: '#000', 
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,

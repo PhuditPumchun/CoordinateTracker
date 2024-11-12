@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // นำเข้าไอคอนเฟืองจาก Ionicons
+import { Ionicons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 import OptionsScreen from './OptionsScreen';
 
@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 25,
     padding: 10,
-    elevation: 5, // เพิ่มเงาเพื่อให้ดูเด่นขึ้น (เฉพาะ Android)
-    shadowColor: '#000', // เพิ่มเงา (เฉพาะ iOS)
+    elevation: 5, 
+    shadowColor: '#000', 
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
