@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, TextInput, StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Text, Button, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Ionicons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
@@ -29,9 +29,11 @@ export default function OptionsScreen({ options, updateOptions, setShowOptions }
           onValueChange={(itemValue) => setAccuracy(itemValue)}
           style={styles.picker}
         >
-          <Picker.Item label="High" value={Location.Accuracy.High} />
-          <Picker.Item label="Balanced" value={Location.Accuracy.Balanced} />
-          <Picker.Item label="Lowest" value={Location.Accuracy.Lowest} />
+          <Picker.Item label="Highest (5)" value={Location.Accuracy.Highest} />
+          <Picker.Item label="High (4)" value={Location.Accuracy.High} />
+          <Picker.Item label="Balanced (3)" value={Location.Accuracy.Balanced} />
+          <Picker.Item label="Low (2)" value={Location.Accuracy.Low} />
+          <Picker.Item label="Lowest (1)" value={Location.Accuracy.Lowest} />
         </Picker>
       </View>
 
@@ -52,18 +54,18 @@ export default function OptionsScreen({ options, updateOptions, setShowOptions }
       />
 
       <TouchableOpacity
-            style={styles.saveButton}
-            onPress={saveOptions}
-          >
-            <Ionicons name="save-outline" size={30} color="black" />
-          </TouchableOpacity>
+        style={styles.saveButton}
+        onPress={saveOptions}
+      >
+        <Ionicons name="save-outline" size={30} color="black" />
+      </TouchableOpacity>
 
       <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => setShowOptions(false)}
-          >
-            <Ionicons name="arrow-back" size={30} color="black" />
-          </TouchableOpacity>
+        style={styles.backButton}
+        onPress={() => setShowOptions(false)}
+      >
+        <Ionicons name="arrow-back" size={30} color="black" />
+      </TouchableOpacity>
 
     </View>
   );
@@ -109,8 +111,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 25,
     padding: 10,
-    elevation: 5, 
-    shadowColor: '#000', 
+    elevation: 5,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
@@ -122,8 +124,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 25,
     padding: 10,
-    elevation: 5, 
-    shadowColor: '#000', 
+    elevation: 5,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
