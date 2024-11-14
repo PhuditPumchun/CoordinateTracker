@@ -25,9 +25,8 @@ export default function SheetScreen({ data, setLocationData, setShowSheet }) {
     Sharing.shareAsync(fileUri);
   };
 
-  // ฟังก์ชันเคลียร์ข้อมูล
   const clearData = () => {
-    setLocationData([]); // ล้างข้อมูลที่เก็บใน locationData
+    setLocationData([]); 
     alert("Cleared!!");
   };
 

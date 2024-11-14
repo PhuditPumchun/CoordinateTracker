@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 import OptionsScreen from './OptionsScreen';
 import SheetScreen from './Sheet';
+import CollectScreen from './CollectScreen';
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -16,11 +17,10 @@ export default function App() {
   const [showOptions, setShowOptions] = useState(false);
   const [locationData, setLocationData] = useState([]);
   const [showSheet, setShowSheet] = useState(false);
+  const [showCollectScreen, setShowCollectScreen] = useState(false);
 
   useEffect(() => {
     let locationSubscription = null;
-    let timer = null;
-    let locations = [];
 
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -37,38 +37,26 @@ export default function App() {
         },
         (newLocation) => {
           setLocation(newLocation);
-          locations.push(newLocation.coords);
-        }
-      );
-
-      timer = setInterval(() => {
-        if (locations.length > 0) {
-          const avgLat = locations.reduce((sum, loc) => sum + loc.latitude, 0) / locations.length;
-          const avgLon = locations.reduce((sum, loc) => sum + loc.longitude, 0) / locations.length;
-          const avgAcc = locations.reduce((sum, loc) => sum + loc.accuracy, 0) / locations.length;
 
           setLocationData((prevData) => [
             ...prevData,
             {
-              lat: avgLat,
-              lon: avgLon,
-              accuracy: avgAcc,
+              lat: newLocation.coords.latitude,
+              lon: newLocation.coords.longitude,
+              accuracy: newLocation.coords.accuracy,
               timeInterval: options.timeInterval,
               distanceInterval: options.distanceInterval,
               time: new Date().toLocaleString(),
             },
           ]);
-          locations = [];
         }
-      }, options.timeInterval);
-
+      );
     })();
 
     return () => {
       if (locationSubscription) {
         locationSubscription.remove();
       }
-      clearInterval(timer);
     };
   }, [options]);
 
@@ -90,21 +78,19 @@ export default function App() {
         <OptionsScreen options={options} updateOptions={updateOptions} setShowOptions={setShowOptions} />
       ) : showSheet ? (
         <SheetScreen data={locationData} setLocationData={setLocationData} setShowSheet={setShowSheet} />
+      ) : showCollectScreen ? (
+        <CollectScreen options={options} setShowCollectScreen={setShowCollectScreen} />
       ) : (
         <>
           <Text style={styles.paragraph}>{text}</Text>
-          <TouchableOpacity
-            style={styles.settingsButton}
-            onPress={() => setShowOptions(true)}
-          >
+          <TouchableOpacity style={styles.settingsButton} onPress={() => setShowOptions(true)}>
             <Ionicons name="settings" size={30} color="black" />
           </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.saveButton}
-            onPress={() => setShowSheet(true)}
-          >
+          <TouchableOpacity style={styles.saveButton} onPress={() => setShowSheet(true)}>
             <Ionicons name="document-text" size={30} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.collectButton} onPress={() => setShowCollectScreen(true)}>
+            <Ionicons name="timer" size={30} color="black" />
           </TouchableOpacity>
         </>
       )}
@@ -129,8 +115,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 25,
     padding: 10,
-    elevation: 5, 
-    shadowColor: '#000', 
+    elevation: 5,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
@@ -142,8 +128,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 25,
     padding: 10,
-    elevation: 5, 
-    shadowColor: '#000', 
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+  },
+  collectButton: {
+    position: 'absolute',
+    bottom: 140,
+    right: 20,
+    backgroundColor: '#fff',
+    borderRadius: 25,
+    padding: 10,
+    elevation: 5,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
