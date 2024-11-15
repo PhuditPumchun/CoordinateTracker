@@ -33,9 +33,10 @@ export default function CollectScreen({ options, setShowCollectScreen }) {
       if (locationData.length > 0) {
         const avgLat = locationData.reduce((sum, loc) => sum + loc.latitude, 0) / locationData.length;
         const avgLon = locationData.reduce((sum, loc) => sum + loc.longitude, 0) / locationData.length;
+        const avgAlt = locationData.reduce((sum, loc) => sum + loc.altitude, 0) / locationData.length;
         const avgAcc = locationData.reduce((sum, loc) => sum + loc.accuracy, 0) / locationData.length;
 
-        setAverageLocation({ lat: avgLat, lon: avgLon, accuracy: avgAcc });
+        setAverageLocation({ lat: avgLat, lon: avgLon, alt : avgAlt, accuracy: avgAcc });
       } else {
         alert("No location data collected.");
       }
@@ -55,6 +56,7 @@ export default function CollectScreen({ options, setShowCollectScreen }) {
         <View style={styles.resultContainer}>
           <Text style={styles.text}>Average Latitude: {averageLocation.lat}</Text>
           <Text style={styles.text}>Average Longitude: {averageLocation.lon}</Text>
+          <Text style={styles.text}>Average Altitude: {averageLocation.alt} meters</Text>
           <Text style={styles.text}>Average Accuracy: {averageLocation.accuracy} meters</Text>
           <View style={styles.buttonContainer}>
             <Button title="Retry" onPress={retryCollection} />

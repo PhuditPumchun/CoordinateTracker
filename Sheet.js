@@ -5,10 +5,10 @@ import * as Sharing from 'expo-sharing';
 
 export default function SheetScreen({ data, setLocationData, setShowSheet }) {
   const generateCSV = () => {
-    const header = 'ID, Latitude, Longitude, Accuracy, Time Interval, Distance Interval, Time\n';
+    const header = 'ID, Latitude, Longitude, Altitude, Accuracy, Time Interval, Distance Interval, Time\n';
     const rows = data
       .map((item, index) => 
-        `${index + 1}, ${item.lat}, ${item.lon}, ${item.accuracy}, ${item.timeInterval},${item.distanceInterval}, ${item.time}`
+        `${index + 1}, ${item.lat}, ${item.lon}, ${item.altitude}, ${item.accuracy}, ${item.timeInterval},${item.distanceInterval}, ${item.time}`
       )
       .join('\n');
     return header + rows;
@@ -39,7 +39,7 @@ export default function SheetScreen({ data, setLocationData, setShowSheet }) {
         ) : (
           data.map((item, index) => (
             <View key={index} style={styles.row}>
-              <Text>{`ID: ${index + 1}, Latitude: ${item.lat}, Longitude: ${item.lon}, Accuracy: ${item.accuracy} meters, Time Interval: ${item.timeInterval} ms, Distance Interval: ${item.distanceInterval} meters, Time: ${item.time}`}</Text>
+              <Text>{`ID: ${index + 1}, Latitude: ${item.lat}, Longitude: ${item.lon}, Altitude: ${item.alt} meters, Accuracy: ${item.accuracy} meters, Time Interval: ${item.timeInterval} ms, Distance Interval: ${item.distanceInterval} meters, Time: ${item.time}`}</Text>
             </View>
           ))
         )}

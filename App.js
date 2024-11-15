@@ -43,6 +43,7 @@ export default function App() {
             {
               lat: newLocation.coords.latitude,
               lon: newLocation.coords.longitude,
+              alt: newLocation.coords.altitude,
               accuracy: newLocation.coords.accuracy,
               timeInterval: options.timeInterval,
               distanceInterval: options.distanceInterval,
@@ -68,8 +69,8 @@ export default function App() {
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
-    const { latitude, longitude, accuracy } = location.coords;
-    text = `Latitude: ${latitude} \nLongitude: ${longitude} \nAccuracy: ${accuracy} meters`;
+    const { latitude, longitude, altitude, accuracy } = location.coords;
+    text = `Latitude: ${latitude} \nLongitude: ${longitude} \nAltitude: ${altitude} meters \nAccuracy: ${accuracy} meters`;
   }
 
   return (
